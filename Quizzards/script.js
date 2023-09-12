@@ -7,23 +7,7 @@ const option_list = document.querySelector(".option_list");
 const time_line = document.querySelector("header .time_line");
 const timeText = document.querySelector(".timer .time_left_txt");
 const timeCount = document.querySelector(".timer .timer_sec");
-const img=document.getElementById("img");
-console.log(img);
 
-// show info box
-info_box.classList.add("activeInfo"); //show info box
-
-// if continueQuiz button clicked
-continue_btn.onclick = ()=>{
-    info_box.classList.remove("activeInfo"); //hide info box
-    quiz_box.classList.add("activeQuiz"); //show quiz box
-    // img.remove();
-    
-    showQuetions(0); //calling showQestions function
-    queCounter(1); //passing 1 parameter to queCounter
-    startTimer(10); //calling startTimer function
-    startTimerLine(0); //calling startTimerLine function
-}
 
 let timeValue =  10;
 let que_count = 0;
@@ -32,6 +16,23 @@ let userScore = 0;
 let counter;
 let counterLine;
 let widthValue = 0;
+
+// show info box
+info_box.classList.add("activeInfo"); //show info box
+
+// if continueQuiz button clicked
+continue_btn.onclick = ()=>{
+    info_box.classList.remove("activeInfo"); //hide info box
+    quiz_box.classList.add("activeQuiz"); //show quiz box
+    
+    showQuetions(que_count); //calling showQestions function
+    queCounter(que_numb); //passing 1 parameter to queCounter
+    startTimer(timeValue); //calling startTimer function
+    startTimerLine(widthValue); //calling startTimerLine function
+    
+}
+
+
 
 const restart_quiz = result_box.querySelector(".buttons .restart");
 const quit_quiz = result_box.querySelector(".buttons .quit");
@@ -174,7 +175,7 @@ function startTimer(time){
             let correcAns = questions[que_count].answer; //getting correct answer from array
             for(i=0; i < allOptions; i++){
                 if(option_list.children[i].textContent == correcAns){ //if there is an option which is matched to an array answer
-                    option_list.children[i].setAttribute("class", "option correct"); //adding green color to matched option
+                    // option_list.children[i].setAttribute("class", "option correct"); //adding green color to matched option
                     option_list.children[i].insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to matched option
                     // alert("Time Off: Auto selected correct answer.");
                 }
@@ -189,11 +190,11 @@ function startTimer(time){
 }
 
 function startTimerLine(time){
-    counterLine = setInterval(timer, 29);
+    counterLine = setInterval(timer, 10);
     function timer(){
-        time += 1; //upgrading time value with 1
+        time += 0.45; //upgrading time value with 1
         time_line.style.width = time + "px"; //increasing width of time_line with px by time value
-        if(time > 549){ //if time value is greater than 549
+        if(time > 500){ //if time value is greater than 500
             clearInterval(counterLine); //clear counterLine
         }
     }
