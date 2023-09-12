@@ -117,6 +117,5 @@ let questions = [
         "h6"
     ]
   },
-  
-    
+      
 ];
